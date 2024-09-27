@@ -30,16 +30,13 @@ public class ProductService {
         }
         return null;
     }
-    public void deleteProduct(long id) {
-        Product productToDelete = productList.stream()
-                .filter(p -> p.getId() == (id))
-                .findFirst()
-                .orElse(null);
-
-        if (productToDelete != null) {
-            productList.remove(productToDelete);
-        } else {
-
+    public boolean deleteProduct(long id) {
+        for (int i = 0; i < productList.size(); i++) {
+            if (productList.get(i).getId() == id) {
+                productList.remove(i);
+                return true;
+            }
         }
+        return false;
     }
 }
